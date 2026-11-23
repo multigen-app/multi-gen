@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Gen — Генератор паролей, ников и почты</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container" id="app-container">
+    <div class="header">
+      <div class="brand">
+        <h1>Multi-Gen</h1>
+        <span class="subtitle">Генератор паролей, ников и почты</span>
+      </div>
+      <button id="theme-toggle" class="icon-btn ripple-target" title="Сменить тему">☀️</button>
+    </div>
+    
+    <!-- Вкладки со скользящим индикатором -->
+    <div class="tabs" id="tabs-bar">
+      <div class="tab-indicator" id="tab-indicator"></div>
+      <button class="tab-btn active ripple-target" data-index="0" data-tab="password">Пароль</button>
+      <button class="tab-btn ripple-target" data-index="1" data-tab="nickname">Никнейм</button>
+      <button class="tab-btn ripple-target" data-index="2" data-tab="email">Почта</button>
+    </div>
+
+    <!-- Обёртка для плавного свайпа и изменения высоты -->
+    <div class="tabs-wrapper" id="tabs-wrapper">
+      <div class="tabs-track" id="tabs-track">
+        
+        <!-- Вкладка 1: Пароль -->
+        <div class="tab-content active" id="password">
+          <div class="result-box">
+            <input type="text" id="pass-result" readonly value="Нажми Сгенерировать">
+            <button class="copy-btn ripple-target" data-target="pass-result">Копировать</button>
+          </div>
+          
+          <div class="controls">
+            <div class="range-label">
+              <div class="range-header">
+                <span>Длина пароля:</span>
+                <strong id="pass-len-val" class="len-badge">14</strong>
+              </div>
+              <div class="smooth-slider" id="pass-slider" role="slider" tabindex="0" aria-valuemin="6" aria-valuemax="32" aria-valuenow="14">
+                <div class="slider-track">
+                  <div class="slider-fill" id="slider-fill"></div>
+                </div>
+                <div class="slider-thumb" id="slider-thumb"></div>
+              </div>
+              <input type="hidden" id="pass-len" value="14">
+            </div>
+
+            <label class="checkbox-label"><input type="checkbox" id="pass-upper" checked> Заглавные буквы (A-Z)</label>
+            <label class="checkbox-label"><input type="checkbox" id="pass-lower" checked> Строчные буквы (a-z)</label>
+            <label class="checkbox-label"><input type="checkbox" id="pass-num" checked> Цифры (0-9)</label>
+            <label class="checkbox-label"><input type="checkbox" id="pass-sym" checked> Спецсимволы (!@#$%^&*)</label>
+          </div>
+          
+          <button class="generate-btn ripple-target" id="gen-pass">Сгенерировать пароль</button>
+        </div>
+
+        <!-- Вкладка 2: Никнейм -->
+        <div class="tab-content" id="nickname">
+          <div class="result-box">
+            <input type="text" id="nick-result" readonly value="Нажми Сгенерировать">
+            <button class="copy-btn ripple-target" data-target="nick-result">Копировать</button>
+          </div>
+
+          <div class="controls">
+            <label class="select-label">
+              <span>Стиль ника:</span>
+              <select id="nick-style">
+                <option value="gamer">Игровой / Крутой</option>
+                <option value="cyber">Киберпанк / Техно</option>
+                <option value="short">Короткий (4-5 букв)</option>
+              </select>
+            </label>
+            <label class="checkbox-label"><input type="checkbox" id="nick-num" checked> Добавить цифры в конце</label>
+            <label class="checkbox-label"><input type="checkbox" id="nick-tag"> Добавить клан-тег [PRO] / xX</label>
+          </div>
+
+          <button class="generate-btn ripple-target" id="gen-nick">Сгенерировать ник</button>
+        </div>
+
+        <!-- Вкладка 3: Почта -->
+        <div class="tab-content" id="email">
+          <div class="result-box">
+            <input type="text" id="email-result" readonly value="Нажми Сгенерировать">
+            <button class="copy-btn ripple-target" data-target="email-result">Копировать</button>
+          </div>
+
+          <div class="controls">
+            <label class="select-label">
+              <span>Почтовый домен:</span>
+              <select id="email-domain">
+                <option value="gmail.com">@gmail.com</option>
+                <option value="yandex.ru">@yandex.ru</option>
+                <option value="mail.ru">@mail.ru</option>
+                <option value="outlook.com">@outlook.com</option>
+              </select>
+            </label>
+            <label class="checkbox-label"><input type="checkbox" id="email-dots" checked> Использовать точку или подчёркивание</label>
+            <label class="checkbox-label"><input type="checkbox" id="email-year"> Добавить случайный год</label>
+          </div>
+
+          <button class="generate-btn ripple-target" id="gen-email">Сгенерировать почту</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Всплывающее уведомление -->
+  <div id="toast" class="toast">Скопировано в буфер!</div>
+
+  <script src="main.js"></script>
+</body>
+</html>
+>
